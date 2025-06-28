@@ -6,10 +6,10 @@ import firebase_admin
 from firebase_admin import credentials, db
 import numpy as np
 
-# Initialize Firebase
+# Initialize Firebase using your saved key
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://face-recognition-and-firebase-default-rtdb.firebaseio.com/'  # ✅ Replace if needed
+    'databaseURL': 'https://face-recognition-and-firebase-default-rtdb.firebaseio.com/'
 })
 
 # Get student details
