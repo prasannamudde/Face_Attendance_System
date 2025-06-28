@@ -7,13 +7,13 @@ from firebase_admin import credentials, db
 import numpy as np
 from datetime import datetime
 
-# Initialize Firebase
+# Initialize Firebase using your saved key
 cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://face-recognition-and-firebase-default-rtdb.firebaseio.com/'  # ✅ Replace if needed
+    'databaseURL': 'https://face-recognition-and-firebase-default-rtdb.firebaseio.com/'
 })
 
-# Load all students from Firebase
+# Load all registered students from Firebase
 students_ref = db.reference("students")
 students = students_ref.get()
 
@@ -30,7 +30,7 @@ if students:
             "email": value['email']
         })
 
-# Start webcam
+# Start webcam for attendance
 cap = cv2.VideoCapture(0)
 marked = set()
 
@@ -58,7 +58,7 @@ while True:
             student_id = student_data[best_match]['id']
 
             if name not in marked:
-                # Mark attendance
+                # Mark attendance in Firebase
                 now = datetime.now()
                 date = now.strftime("%Y-%m-%d")
                 time = now.strftime("%H:%M:%S")
